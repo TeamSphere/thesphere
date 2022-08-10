@@ -1,8 +1,11 @@
 <?php
 
-class Home {
+class Home extends Controller {
+
 	public function index() {
-		echo "home view page ";
+		
+		$this->view('home');
+
 	}
 	public function edit() {
 		echo "home editing ";

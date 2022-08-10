@@ -4,13 +4,9 @@ class Home extends Controller {
 
 	public function index() {
 		
-		$this->view('home');
+		$data['title'] = "Home";
 
-	}
-	public function edit() {
-		echo "home editing ";
-	}
-	public function delete() {
-		echo "home delete ";
+		$this->view('home',$data);
+
 	}
 }

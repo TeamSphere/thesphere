@@ -1,8 +1,15 @@
 <?php
 
+function show($stuff) {
+	echo "<pre>";
+	print_r($stuff);
+	echo "</pre>";
+}
+
 class App {
 	
 	protected $controller = '_404';
+	protected $method = 'index';
 
 	function __construct() {
 		
@@ -18,6 +25,17 @@ class App {
 		}
 
 		$mycontroller = new $this->controller();
+		$mymethod = $arr[1] ?? $this->method;
+
+		if(method_exists($mycontroller, strtolower($mymethod))) {
+			
+			$this->method = strtolower($mymethod);
+
+		} 
+		show($arr);
+		call_user_func_array([$mycontroller,$this->method], $arr);
+
+
 	}
 
 	private function getURL() {

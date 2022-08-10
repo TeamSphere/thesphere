@@ -9,7 +9,7 @@ class Home {
 		echo "home editing";
 	}
 
-	public function delete() {
-		echo "home delete";
+	public function delete($id,$id2,$id3 = null) {
+		echo "home delete ".$id3;
 	}
 }

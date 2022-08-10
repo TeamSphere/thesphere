@@ -2,14 +2,12 @@
 
 class Home {
 	public function index() {
-		echo "home view page";
+		echo "home view page ";
 	}
-
 	public function edit() {
-		echo "home editing";
+		echo "home editing ";
 	}
-
-	public function delete($id,$id2,$id3 = null) {
-		echo "home delete ".$id3;
+	public function delete() {
+		echo "home delete ";
 	}
 }

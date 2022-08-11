@@ -16,8 +16,9 @@ class Database {
 
 			if($check) {
 
-				$type = PDO::FETCH_OBJ;
-				if ($type != 'object') {
+				if ($type == 'object') {
+					$type = PDO::FETCH_OBJ;
+				} else {
 					$type = PDO::FETCH_ASSOC;
 				}
 

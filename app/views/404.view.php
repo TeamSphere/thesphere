@@ -1,1 +1,8 @@
-<h1>This is a 404 page</h1>
+<?php $this->view('includes/header', $data) ?>
+<?php $this->view('includes/nav', $data) ?>
+
+<div class="container-fluid p-4 text-center">
+	<h1>Page not found</h1>
+</div>
+
+<?php $this->view('includes/footer',$data) ?>

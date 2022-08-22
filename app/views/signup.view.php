@@ -76,19 +76,10 @@
                       <div class="invalid-feedback">Please, enter your last name!</div>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-12">
                       <label for="yourEmail" class="form-label">Your Email</label>
                       <input type="email" name="email" class="form-control" id="yourEmail">
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
-                    </div>
-
-                    <div class="col-6">
-                      <label for="yourUsername" class="form-label">Username</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername">
-                        <div class="invalid-feedback">Please choose a username.</div>
-                      </div>
                     </div>
 
                     <div class="col-12">
@@ -105,7 +96,7 @@
 
                     <div class="col-12">
                       <div class="form-check">
-                        <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms">
+                        <input class="form-check-input" name="terms" type="checkbox" value="1" id="acceptTerms">
                         <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
                         <div class="invalid-feedback">You must agree before submitting.</div>
                       </div>

@@ -67,7 +67,7 @@
                   <form method="post" class="row g-3 needs-validation" novalidate>
                     <div class="col-6">
                       <label for="yourName" class="form-label">First Name</label>
-                      <input value="<?= set_value('firstname')?>" type="text" name="firstname" class="form-control <?=!empty($errors['firstname']) ? 'border-danger':'';?>" id="yourName" required1>
+                      <input value="<?= set_value('firstname')?>" type="text" name="firstname" class="form-control <?=!empty($errors['firstname']) ? 'border-danger':'';?>" id="yourName" required>
                       <div class="invalid-feedback">Please, enter your first name!</div>
 
                       <?php if(!empty($errors['firstname'])):?>
@@ -77,7 +77,7 @@
                     </div>
                     <div class="col-6">
                       <label for="yourName2" class="form-label">Last Name</label>
-                      <input value="<?= set_value('lastname')?>" type="text" name="lastname" class="form-control <?=!empty($errors['lastname']) ? 'border-danger':'';?>" id="yourName2" required1>
+                      <input value="<?= set_value('lastname')?>" type="text" name="lastname" class="form-control <?=!empty($errors['lastname']) ? 'border-danger':'';?>" id="yourName2" required>
                       <div class="invalid-feedback">Please, enter your last name!</div>
 
                       <?php if(!empty($errors['lastname'])):?>
@@ -88,7 +88,7 @@
 
                     <div class="col-12">
                       <label for="yourEmail" class="form-label">Your Email</label>
-                      <input value="<?= set_value('email')?>" type="email" name="email" class="form-control <?=!empty($errors['email']) ? 'border-danger':'';?>" id="yourEmail" required1>
+                      <input value="<?= set_value('email')?>" type="email" name="email" class="form-control <?=!empty($errors['email']) ? 'border-danger':'';?>" id="yourEmail" required>
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                       
                       <?php if(!empty($errors['email'])):?>
@@ -99,12 +99,12 @@
  
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
-                      <input value="<?= set_value('password')?>" type="password" name="password" class="form-control <?=!empty($errors['password']) ? 'border-danger':'';?>" id="yourPassword" required1>
+                      <input value="<?= set_value('password')?>" type="password" name="password" class="form-control <?=!empty($errors['password']) ? 'border-danger':'';?>" id="yourPassword" required>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Retype Password</label>
-                      <input value="<?= set_value('retype_password')?>" type="password" name="retype_password" class="form-control" id="yourPassword" required1>
+                      <input value="<?= set_value('retype_password')?>" type="password" name="retype_password" class="form-control" id="yourPassword" required>
                       <div class="invalid-feedback">Please retype your password!</div>
 
                       <?php if(!empty($errors['password'])):?>
@@ -115,7 +115,7 @@
 
                     <div class="col-12">
                       <div class="form-check">
-                        <input <?= set_value('terms') ? 'checked':''; ?> class="form-check-input" name="terms" type="checkbox" value="1" id="acceptTerms" required1>
+                        <input <?= set_value('terms') ? 'checked':''; ?> class="form-check-input" name="terms" type="checkbox" value="1" id="acceptTerms" required>
                         <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
                         <div class="invalid-feedback">You must agree before submitting.</div>
 

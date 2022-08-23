@@ -2,7 +2,7 @@
 
 class User extends Model {
 
-	public $error = [];
+	public $errors = [];
 	protected $table = "users";
 
 	protected $allowedColumns = [

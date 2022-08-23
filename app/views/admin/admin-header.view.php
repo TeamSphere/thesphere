@@ -211,13 +211,13 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="<?=ROOT?>/niceadmin/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2"><?=ucfirst(substr(Auth::getFirstname(),0,1))?>. <?=Auth::getLastname()?></span>
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?=ucfirst(substr(esc($row->firstname),0,1))?>. <?=ucfirst(esc($row->lastname))?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6><?=Auth::getFirstname()?> <?=Auth::getLastname()?></h6>
-              <span><?=Auth::getRole()?></span>
+              <h6><?=esc($row->firstname)?> <?=esc($row->lastname)?></h6>
+              <span><?=esc($row->role)?></span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -283,7 +283,28 @@
 	  <li class="nav-item">
         <a class="nav-link " href="<?=ROOT?>/admin/courses">
           <i class="bi bi-camera-reels"></i>
-          <span>Courses</span>
+          <span>My Courses</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+	  <li class="nav-item">
+        <a class="nav-link " href="<?=ROOT?>/admin/lessons">
+          <i class="bi bi-person-video3"></i>
+          <span>Enrolled Courses</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+	  <li class="nav-item">
+        <a class="nav-link " href="<?=ROOT?>/admin/history">
+          <i class="bi bi-hourglass-split"></i>
+          <span>Watch History</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+	  <li class="nav-item">
+        <a class="nav-link " href="<?=ROOT?>/admin/sales">
+          <i class="bi bi-cash-coin"></i>
+          <span>Sales</span>
         </a>
       </li><!-- End Dashboard Nav -->
 

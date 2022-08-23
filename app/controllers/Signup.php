@@ -20,6 +20,8 @@ class Signup extends Controller
 			{
 				$_POST['date'] = date("Y-m-d H:i:s");
 				$_POST['role'] = 'user';
+				$_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
 				$user->insert($_POST);
 			
 				message("Your profile was successfuly created. Please login");

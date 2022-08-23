@@ -1,12 +1,17 @@
-<?php
+<?php 
 
-class Logout extends Controller {
+/**
+ * logout class
+ */
+class Logout extends Controller
+{
+	
+	public function index()
+	{
 
-	public function index() {
-		
 		Auth::logout();
 
 		redirect('home');
-
 	}
+	
 }

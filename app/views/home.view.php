@@ -1,10 +1,5 @@
 <?php $this->view('includes/header', $data) ?>
 <?php $this->view('includes/nav', $data) ?>
-
-  
-
-
-
     <!-- ======= Hero Slider Section ======= -->
     <section id="hero-slider" class="hero-slider">
       <div class="container-md" data-aos="fade-in">

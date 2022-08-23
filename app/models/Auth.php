@@ -30,7 +30,7 @@ class Auth
 
 	public static function logged_in()
 	{
-
+		session_start();
 		if(!empty($_SESSION['USER_DATA']))
 		{
 			return true;

@@ -211,13 +211,13 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="<?=ROOT?>/niceadmin/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2"><?=ucfirst(substr(esc($row->firstname),0,1))?>. <?=ucfirst(esc($row->lastname))?></span>
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?=ucfirst(substr(Auth::getFirstname(),0,1))?>. <?=Auth::getLastname()?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6><?=esc($row->firstname)?> <?=esc($row->lastname)?></h6>
-              <span><?=esc($row->role)?></span>
+              <h6><?=Auth::getFirstname()?> <?=Auth::getLastname()?></h6>
+              <span><?=Auth::getRole()?></span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -254,7 +254,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="<?=ROOT?>/logout">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>

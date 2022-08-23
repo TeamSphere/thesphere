@@ -1,6 +1,6 @@
 <?php $this->view('admin/admin-header',$data) ?>
 
-  <main id="main" class="main">
+
 
     <div class="pagetitle">
       <h1>Dashboard</h1>
@@ -646,6 +646,4 @@
       </div>
     </section>
 
-  </main><!-- End #main -->
-
- <?php $this->view('admin/admin-footer',$data) ?>
+	<?php $this->view('admin/admin-footer',$data) ?>

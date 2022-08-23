@@ -8,7 +8,7 @@ class Login extends Controller
 	
 	public function index()
 	{
-
+		session_start();
 		$data['errors'] = [];
 
 		$data['title'] = "Login";

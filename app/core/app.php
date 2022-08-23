@@ -6,11 +6,9 @@ class App
 	protected $controller = '_404';
 	protected $method = 'index';
 	public static $page = '_404';
-	
-	
+
 	function __construct()
 	{
-
 		$arr = $this->getURL();
 
 		$filename = "../app/controllers/".ucfirst($arr[0]).".php";

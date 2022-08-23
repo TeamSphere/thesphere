@@ -28,14 +28,15 @@ function redirect($link)
 
 function message($msg = '',$erase = false)
 {
-
+	
+	
 	if(!empty($msg))
 	{
 		$_SESSION['message'] = $msg;
 	}else{
 
 		if(!empty($_SESSION['message']))
-		{
+		{	
 			$msg = $_SESSION['message'];
 			if($erase){
 				unset($_SESSION['message']);

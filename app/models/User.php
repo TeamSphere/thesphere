@@ -29,7 +29,7 @@ class User extends Model
 		'instagram_link',
 		'twitter_link',
 		'linkedin_link',
-
+		 
 	];
 
 	public function validate($data)
@@ -79,6 +79,7 @@ class User extends Model
 		return false;
 	}
 
+
 	public function edit_validate($data)
 	{
 		$this->errors = [];
@@ -103,30 +104,39 @@ class User extends Model
 			$this->errors['email'] = "That email already exists";
 		}
 
-		if (!empty($data['facebook_link'])) {
-			if(!filter_var($data['facebook_link'],FILTER_VALIDATE_URL)) {
+		if(!empty($data['facebook_link']))
+		{
+			if(!filter_var($data['facebook_link'],FILTER_VALIDATE_URL))
+			{
 				$this->errors['facebook_link'] = "Facebook link is not valid";
 			}
 		}
 
-		if (!empty($data['twitter_link'])) {
-			if(!filter_var($data['twitter_link'],FILTER_VALIDATE_URL)) {
+		if(!empty($data['twitter_link']))
+		{
+			if(!filter_var($data['twitter_link'],FILTER_VALIDATE_URL))
+			{
 				$this->errors['twitter_link'] = "Twitter link is not valid";
 			}
 		}
 
-		if (!empty($data['instagram_link'])) {
-			if(!filter_var($data['instagram_link'],FILTER_VALIDATE_URL)) {
+		if(!empty($data['instagram_link']))
+		{
+			if(!filter_var($data['instagram_link'],FILTER_VALIDATE_URL))
+			{
 				$this->errors['instagram_link'] = "Instagram link is not valid";
 			}
 		}
 
-		if (!empty($data['linkedin_link'])) {
-			if(!filter_var($data['linkedin_link'],FILTER_VALIDATE_URL)) {
-				$this->errors['linkedin_link'] = "LinkedIn link is not valid";
+		if(!empty($data['linkedin_link']))
+		{
+			if(!filter_var($data['linkedin_link'],FILTER_VALIDATE_URL))
+			{
+				$this->errors['linkedin_link'] = "Linkedin link is not valid";
 			}
 		}
-		
+
+  
 		if(empty($this->errors))
 		{
 			return true;
@@ -136,5 +146,4 @@ class User extends Model
 	}
 
 
-	
 }

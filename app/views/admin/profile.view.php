@@ -1,14 +1,15 @@
 <?php $this->view('admin/admin-header',$data) ?>
 
 	<?php if(!empty($row)):?>
- <div class="pagetitle">
+
+	<div class="pagetitle">
       <h1>Profile</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Users</li>
           <li class="breadcrumb-item active">Profile</li>
-		  <li class="breadcrumb-item active"><?=esc($row->firstname)?> <?=esc($row->lastname)?></li>
+          <li class="breadcrumb-item active"><?=esc($row->firstname)?> <?=esc($row->lastname)?></li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -67,13 +68,8 @@
                   <h5 class="card-title">Profile Details</h5>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">First Name</div>
-                    <div class="col-lg-9 col-md-8"><?=esc($row->firstname)?></div>
-                  </div>
-
-				  <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Last Name</div>
-                    <div class="col-lg-9 col-md-8"><?=esc($row->lastname)?></div>
+                    <div class="col-lg-3 col-md-4 label ">Full Name</div>
+                    <div class="col-lg-9 col-md-8"><?=esc($row->firstname)?> <?=esc($row->lastname)?></div>
                   </div>
 
                   <div class="row">
@@ -111,39 +107,39 @@
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                   <!-- Profile Edit Form -->
-                  <form>
+                  <form method="post">
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
-                        
-						<div class="d-flex">
-							<img class="js-image-preview" src="<?=ROOT?>/niceadmin/assets/img/profile-img.jpg" style="width:200px;max-width:200px;height:200px;object-fit:cover;" alt="Profile">
-							<div class="js-filename m-2">Selected File: None</div>
-						</div>
-						<div class="pt-2">
-                          <label href="#" class="btn btn-primary btn-sm" title="Upload new profile image">
-							<i class="text-white bi bi-upload"></i>
-							<input onchange="load_image(this.files[0])" type="file" name="image" style="display: none;">
-						  </label>
+
+                        <div class="d-flex">
+                          <img class="js-image-preview" src="<?=ROOT?>/niceadmin/assets/img/profile-img.jpg" alt="Profile" style="width:200px;max-width:200px;height:200px;object-fit: cover;">
+                          <div class="js-filename m-2">Selected File: None</div>
+                        </div>
+                        <div class="pt-2">
+                          <label class="btn btn-primary btn-sm" title="Upload new profile image" >
+                            <i class="text-white bi bi-upload"></i>
+                            <input onchange="load_image(this.files[0])" type="file" name="image" style="display: none;">
+                          </label>
                           <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
                         </div>
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="firstName" class="col-md-4 col-lg-3 col-form-label">First Name</label>
+                      <label for="firstname" class="col-md-4 col-lg-3 col-form-label">First Name</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="firstName" type="text" class="form-control" id="firstName" value="<?=set_value('firstname',$row->firstname)?>">
+                        <input name="firstname" type="text" class="form-control" id="firstname" value="<?=set_value('firstname',$row->firstname)?>">
                       </div>
                     </div>
 
-					<div class="row mb-3">
-                      <label for="lastName" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
+                    <div class="row mb-3">
+                      <label for="lastname" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="lastName" type="text" class="form-control" id="lastName" value="<?=set_value('lastname',$row->lastname)?>">
+                        <input name="lastname" type="text" class="form-control" id="lastname" value="<?=set_value('lastname',$row->lastname)?>">
                       </div>
                     </div>
-
+ 
                     <div class="row mb-3">
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                       <div class="col-md-8 col-lg-9">
@@ -222,10 +218,10 @@
                     </div>
 
                     <div class="text-center">
-						<a href="<?=ROOT?>/admin">
-								<button type="submit" class="btn btn-primary float-start">Back</button>
-						</a>
-						<button type="submit" class="btn btn-primary float-end">Save Changes</button>
+                      <a href="<?=ROOT?>/admin">
+                        <button type="button" class="btn btn-primary  float-start">Back</button>
+                      </a>
+                      <button type="submit" class="btn btn-danger float-end">Save Changes</button>
                     </div>
                   </form><!-- End Profile Edit Form -->
 
@@ -313,21 +309,26 @@
         </div>
       </div>
     </section>
+
 	<?php else:?>
+
 		<div class="alert alert-danger alert-dismissible fade show" role="alert">
-			That profile is not found!
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-       </div>
+                That profile was not found!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
 	<?php endif;?>
-	<script>
-		
-		function load_image(file) {
-			document.querySelector(".js-filename").innerHTML = "Selected File: " + file.name;
 
-			var mylink = window.URL.createObjectURL(file);
+<script>
+  
+  function load_image(file)
+  {
 
-			document.querySelector(".js-image-preview").src = mylink;
-		}
+    document.querySelector(".js-filename").innerHTML = "Selected File: " + file.name;
 
-	</script>
+    var mylink = window.URL.createObjectURL(file);
+    document.querySelector(".js-image-preview").src = mylink;
+  }
+
+</script>
 <?php $this->view('admin/admin-footer',$data) ?>

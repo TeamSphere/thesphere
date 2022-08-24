@@ -461,7 +461,7 @@
           //everything went well
           //alert("upload complete");
           //window.location.reload();
-          handle_result(ajax.responseText);
+          handle_result(ajax.responseText
         }else{
           //error
           alert("an error occurred");
@@ -497,6 +497,20 @@
         alert("Data saved successfully!");
       }
     }
+  }
+
+  function handle_result(result) {
+	  var obj = JSON.parse(result);
+	  if(typeof obj == 'object') {
+		  //object was created
+		  if(typeof obj.errors == 'object') {
+			  //we have errors
+			  alert(obj.errors);
+		  } else {
+			  //save complete
+			  alert("Data saved successfully!");
+		  }
+	  }
   }
 
 </script>

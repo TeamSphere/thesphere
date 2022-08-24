@@ -36,7 +36,7 @@ class Admin extends Controller {
 				file_put_contents("uploads/index.php", "<?php //silence");
 			}
 
-			if($user->edit_validate($data)) {
+			if($user->edit_validate($_POST)) {
 
 				$allowed = ['image/jpg','image/png'];
 

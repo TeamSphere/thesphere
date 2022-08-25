@@ -78,26 +78,38 @@
 
                 <!-- Bordered Tabs Justified -->
                 <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
-                <li class="nav-item flex-fill" role="presentation">
-                    <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
-                </li>
-                <li class="nav-item flex-fill" role="presentation">
-                    <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
-                </li>
-                <li class="nav-item flex-fill" role="presentation">
-                    <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
-                </li>
+                    <li class="nav-item flex-fill" role="presentation">
+                        <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100 active" id="intended-learners-tab" data-bs-toggle="tab" data-bs-target="#intended-learners" type="button" role="tab" aria-controls="intended-learners" aria-selected="true">Intended learners</button>
+                    </li>
+                    <li class="nav-item flex-fill" role="presentation">
+                        <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="curriculum-tab" data-bs-toggle="tab" data-bs-target="#curriculum" type="button" role="tab" aria-controls="curriculum" aria-selected="false">Curriculum</button>
+                    </li>
+                    <li class="nav-item flex-fill" role="presentation">
+                        <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="course-landing-page-tab" data-bs-toggle="tab" data-bs-target="#course-landing-page" type="button" role="tab" aria-controls="landing-page" aria-selected="false">Course landing page</button>
+                    </li>
+                    <li class="nav-item flex-fill" role="presentation">
+                        <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="promotions-tab" data-bs-toggle="tab" data-bs-target="#promotions" type="button" role="tab" aria-controls="promotions" aria-selected="false">Promotions</button>
+                    </li>
+                    <li class="nav-item flex-fill" role="presentation">
+                        <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="course-message-tab" data-bs-toggle="tab" data-bs-target="#course-messages" type="button" role="tab" aria-controls="course-messages" aria-selected="false">Course messages</button>
+                    </li>
                 </ul>
                 <div class="tab-content pt-2" id="borderedTabJustifiedContent">
-                <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel" aria-labelledby="home-tab">
-                    Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.
-                </div>
-                <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
-                    Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Voluptate nihil recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
-                </div>
-                <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab">
-                    Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
-                </div>
+                    <div class="tab-pane fade show active" id="intended-learners" role="tabpanel" aria-labelledby="intended-learners">
+                        1Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.
+                    </div>
+                    <div class="tab-pane fade" id="curriculum" role="tabpanel" aria-labelledby="curriculum">
+                        2Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Voluptate nihil recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
+                    </div>
+                    <div class="tab-pane fade" id="course-landing-page" role="tabpanel" aria-labelledby="landing-page">
+                        3Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+                    </div>
+                    <div class="tab-pane fade" id="promotions" role="tabpanel" aria-labelledby="promotions">
+                       4 Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+                    </div>
+                    <div class="tab-pane fade" id="course-messages" role="tabpanel" aria-labelledby="course-messages">
+                       5 Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+                    </div>
                </div><!-- End Bordered Tabs Justified -->
             <?php else: ?>
             <div>That course was not found!</div>
@@ -167,5 +179,26 @@
   </div>
 
 <?php endif;?>
+
+<script>
+
+     var tab = sessionStorage.getItem("tab") ? sessionStorage.getItem("tab"): "#intended-learners";
+
+    function show_tab(tab_name)
+      {
+        const someTabTriggerEl = document.querySelector(tab_name +"-tab");
+        const tab = new bootstrap.Tab(someTabTriggerEl);
+
+        tab.show();
+
+      }
+
+    function set_tab(tab_name) {
+        tab = tab_name;
+        sessionStorage.setItem("tab", tab_name);
+        alert(tab_name)
+     }
+
+</script>
 
 <?php $this->view('admin/admin-footer',$data) ?>

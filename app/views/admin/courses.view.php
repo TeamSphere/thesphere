@@ -19,7 +19,7 @@
         </div>
 
         <div class="col-md-12">
-          <input value="<?=set_value('primary_subject')?>" name="primary_subject" type="text" class="form-control <?=!empty($errors['primary_subject']) ? 'border-danger':'';?>" placeholder="Primary subject e.g Photography or Vlogging">
+          <input value="<?=set_value('primary_subject')?>" name="primary_subject" type="text" class="form-control <?=!empty($errors['primary_subject']) ? 'border-danger':'';?>" placeholder="Primary subject e.g logic, philosophy, mechanics etc.">
 
           <?php if(!empty($errors['primary_subject'])):?>
             <small class="text-danger"><?=$errors['primary_subject']?></small>

@@ -7,6 +7,7 @@
         margin-bottom: 10px;
         justify-content: center;
         text-align: center;
+        flex-wrap: wrap;
     }
     .my-tab {
         flex: 1;
@@ -14,6 +15,8 @@
         padding-bottom: 10px;
         cursor: pointer;
         user-select: none;
+        min-width: 150px;
+        padding-top: 10px;
     }
 
     my-tab:hover {
@@ -303,6 +306,7 @@
         item.innerHTML = `<img class="loader" src="<?=ROOT?>/assets/images/loader.gif" />`
     }
 
+    show_tab(tab);
 
 </script>
 

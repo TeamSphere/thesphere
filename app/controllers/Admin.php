@@ -20,6 +20,21 @@ class Admin extends Controller
 		$this->view('admin/dashboard',$data);
 	}
 
+	public function courses($action = null, $id = null) {
+		
+		if(!Auth::logged_in())
+		{
+			message('please login to view the admin section');
+			redirect('login');
+		}
+
+		$data = [];
+		$data['action'] = $action;
+		$data['id'] = $id;
+
+		$this->view('admin/courses',$data);
+	}
+
 	public function profile($id = null)
 	{
 

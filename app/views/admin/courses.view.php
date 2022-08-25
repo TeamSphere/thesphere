@@ -1,5 +1,36 @@
 <?php $this->view('admin/admin-header',$data) ?>
 
+<style>
+    .tabs-holder {
+        display: flex;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        justify-content: center;
+        text-align: center;
+    }
+    .my-tab {
+        flex: 1;
+        border-bottom: solid 1px #ffcb6a;
+        padding-bottom: 10px;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    my-tab:hover {
+        color: orange;
+    }
+
+    .active-tab {
+       color: orange;
+       border-bottom: solid 2px orange;
+
+    }
+
+    .hide { 
+        display: none;
+    }
+</style>
+
 <?php if($action == 'add'):?>
 
   <div class="card col-md-5 mx-auto">
@@ -74,48 +105,29 @@
 
                 <h5 class=""><?=esc($row->title)?></h5>
 
-                
+                <br />
+                <!-- tabs -->
+                <div class="tabs-holder">
+                    <div onclick="set_tab(this.id,this)" id="intended-learners" class="active-tab my-tab">Intended Learners</div>
+                    <div onclick="set_tab(this.id,this)" id="curriculum" class="my-tab">Curriculum</div>
+                    <div onclick="set_tab(this.id,this)" id="course-landing-page" class="my-tab">Course landing page</div>
+                    <div onclick="set_tab(this.id,this)" id="promotions" class="my-tab">Promotions</div>
+                    <div onclick="set_tab(this.id,this)" id="course-messages" class="my-tab">Course messages</div>
+                </div>
+                <!-- end tabs -->
 
-                <!-- Bordered Tabs Justified -->
-                <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
-                    <li class="nav-item flex-fill" role="presentation">
-                        <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100 active" id="intended-learners-tab" data-bs-toggle="tab" data-bs-target="#intended-learners" type="button" role="tab" aria-controls="intended-learners" aria-selected="true">Intended learners</button>
-                    </li>
-                    <li class="nav-item flex-fill" role="presentation">
-                        <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="curriculum-tab" data-bs-toggle="tab" data-bs-target="#curriculum" type="button" role="tab" aria-controls="curriculum" aria-selected="false">Curriculum</button>
-                    </li>
-                    <li class="nav-item flex-fill" role="presentation">
-                        <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="course-landing-page-tab" data-bs-toggle="tab" data-bs-target="#course-landing-page" type="button" role="tab" aria-controls="landing-page" aria-selected="false">Course landing page</button>
-                    </li>
-                    <li class="nav-item flex-fill" role="presentation">
-                        <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="promotions-tab" data-bs-toggle="tab" data-bs-target="#promotions" type="button" role="tab" aria-controls="promotions" aria-selected="false">Promotions</button>
-                    </li>
-                    <li class="nav-item flex-fill" role="presentation">
-                        <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="course-message-tab" data-bs-toggle="tab" data-bs-target="#course-messages" type="button" role="tab" aria-controls="course-messages" aria-selected="false">Course messages</button>
-                    </li>
-                </ul>
-                <div oninput="something_changed(event)"class="tab-content pt-2" id="borderedTabJustifiedContent">
-                    <div class="tab-pane fade show active" id="intended-learners" role="tabpanel" aria-labelledby="intended-learners">
-                        1Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.
-                        <input type="text" name="" />
-                    </div>
-                    <div class="tab-pane fade" id="curriculum" role="tabpanel" aria-labelledby="curriculum">
-                        2Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Voluptate nihil recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
-                        <input type="text" name="" />
-                    </div>
-                    <div class="tab-pane fade" id="course-landing-page" role="tabpanel" aria-labelledby="landing-page">
-                        3Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
-                        <input type="text" name="" />
-                    </div>
-                    <div class="tab-pane fade" id="promotions" role="tabpanel" aria-labelledby="promotions">
-                        4 Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
-                        <input type="text" name="" />
-                    </div>
-                    <div class="tab-pane fade" id="course-messages" role="tabpanel" aria-labelledby="course-messages">
-                        5 Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
-                        <input type="text" name="" />
-                    </div>
-                </div><!-- End Bordered Tabs Justified -->
+                <!-- div tabs -->
+
+                <div oninput="something_changed(event)">
+                    <div id="intended-learners-div" class="div-tab">1</div>
+                    <div id="curriculum-div" class="div-tab hide" >2</div>
+                    <div id="course-landing-page-div" class="div-tab hide">3</div>
+                    <div id="promotions-div" class="div-tab hide">4</div>
+                    <div id="course-messages-div" class="div-tab hide">5</div>
+                </div>
+
+                <!-- end div tabs -->
+
             <?php else: ?>
             <div>That course was not found!</div>
             <?php endif;?>
@@ -202,7 +214,22 @@
 
       }
 
-    function set_tab(tab_name) {
+    function set_tab(tab_name,div) {
+
+        var children = div.parentNode.children
+        for (var i = 0; i < children.length; i++) {
+            children[i].classList.remove("active-tab")
+        }
+        div.classList.add('active-tab');
+
+        children = document.querySelector("#"+tab_name+"-div").parentNode.children;
+
+        for (var i = 0; i < children.length; i++) {
+            children[i].classList.add("hide");
+        }
+        document.querySelector("#" + tab_name + "-div").classList.remove("hide");
+
+        return;
         tab = tab_name;
         sessionStorage.setItem("tab", tab_name);
 

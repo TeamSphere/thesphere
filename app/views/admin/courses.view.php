@@ -66,9 +66,9 @@
             <?php if(!empty($row)):?>
 
                 <div class="float-end">
-                    <button class="btn btn-success">Save</button>
+                    <button class="js-save-button btn btn-success disabled">Save</button>
                     <a href="<?=ROOT?>/admin/courses">
-                         <button class="btn btn-primary">Back</button>
+                            <button class="btn btn-primary">Back</button>
                     </a>
                 </div>
 
@@ -108,14 +108,14 @@
                         <input type="text" name="" />
                     </div>
                     <div class="tab-pane fade" id="promotions" role="tabpanel" aria-labelledby="promotions">
-                       4 Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+                        4 Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
                         <input type="text" name="" />
                     </div>
                     <div class="tab-pane fade" id="course-messages" role="tabpanel" aria-labelledby="course-messages">
-                       5 Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+                        5 Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
                         <input type="text" name="" />
                     </div>
-               </div><!-- End Bordered Tabs Justified -->
+                </div><!-- End Bordered Tabs Justified -->
             <?php else: ?>
             <div>That course was not found!</div>
             <?php endif;?>
@@ -196,6 +196,9 @@
         const tab = new bootstrap.Tab(someTabTriggerEl);
 
         tab.show();
+        
+        disable_save_button(false);
+        
 
       }
 
@@ -209,16 +212,30 @@
                  tab = dirty;
                 sessionStorage.setItem("tab", dirty);
                 setTimeout(function () {
+
                     show_tab(dirty);
+                    disable_save_button(true);
+
                 }, 10);
             } else {
                 dirty = false;
+                disable_save_button(false);
             }
         }
     }
 
     function something_changed(e) {
-        dirty = tab;
+           dirty = tab;
+         disable_save_button(true);
+       
+    }
+
+    function disable_save_button(status = false) {
+        if (status) {
+            document.querySelector(".js-save-button").classList.remove("disabled");
+        } else {
+            document.querySelector(".js-save-button").classList.add("disabled");
+        }
     }
 
 </script>

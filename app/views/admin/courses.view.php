@@ -119,11 +119,9 @@
                 <!-- div tabs -->
 
                 <div oninput="something_changed(event)">
-                    <div id="intended-learners-div" class="div-tab">1</div>
-                    <div id="curriculum-div" class="div-tab hide" >2</div>
-                    <div id="course-landing-page-div" class="div-tab hide">3</div>
-                    <div id="promotions-div" class="div-tab hide">4</div>
-                    <div id="course-messages-div" class="div-tab hide">5</div>
+                    <div id="tabs-content">
+                        1
+                    </div
                 </div>
 
                 <!-- end div tabs -->
@@ -199,56 +197,43 @@
 
 <script>
 
-    var tab = sessionStorage.getItem("tab") ? sessionStorage.getItem("tab"): "#intended-learners";
+    var tab = sessionStorage.getItem("tab") ? sessionStorage.getItem("tab"): "intended-learners";
     var dirty = false;
 
     function show_tab(tab_name)
       {
-        const someTabTriggerEl = document.querySelector(tab_name +"-tab");
-        const tab = new bootstrap.Tab(someTabTriggerEl);
+        //change active tab
+        var div = document.querySelector("#" + tab_name);
+        var children = div.parentNode.children
 
-        tab.show();
+        for (var i = 0; i < children.length; i++) {
+            children[i].classList.remove("active-tab")
+        }
+        div.classList.add('active-tab');
+
+        var content = tab_name + "<input />";
+        document.querySelector("#tabs-content").innerHTML = content;
         
         disable_save_button(false);
         
 
       }
 
-    function set_tab(tab_name,div) {
-
-        var children = div.parentNode.children
-        for (var i = 0; i < children.length; i++) {
-            children[i].classList.remove("active-tab")
-        }
-        div.classList.add('active-tab');
-
-        children = document.querySelector("#"+tab_name+"-div").parentNode.children;
-
-        for (var i = 0; i < children.length; i++) {
-            children[i].classList.add("hide");
-        }
-        document.querySelector("#" + tab_name + "-div").classList.remove("hide");
-
-        return;
-        tab = tab_name;
-        sessionStorage.setItem("tab", tab_name);
+    function set_tab(tab_name) {
 
         if (dirty) {
             //ask user to save when switching tabs
             if (!confirm("Your changes were not saved. Continue?")) {
-                 tab = dirty;
-                sessionStorage.setItem("tab", dirty);
-                setTimeout(function () {
-
-                    show_tab(dirty);
-                    disable_save_button(true);
-
-                }, 10);
-            } else {
-                dirty = false;
-                disable_save_button(false);
-            }
+                return;
+            } 
         }
+
+        tab = tab_name;
+        sessionStorage.setItem("tab", tab_name);
+
+        dirty = false;
+        show_tab(tab_name);
+
     }
 
     function something_changed(e) {

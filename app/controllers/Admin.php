@@ -20,8 +20,9 @@ class Admin extends Controller
 		$this->view('admin/dashboard',$data);
 	}
 
-	public function courses($action = null, $id = null) {
-		
+	public function courses($action = null, $id = null)
+	{
+
 		if(!Auth::logged_in())
 		{
 			message('please login to view the admin section');
@@ -31,6 +32,12 @@ class Admin extends Controller
 		$data = [];
 		$data['action'] = $action;
 		$data['id'] = $id;
+
+		if($action == 'add')
+		{
+			$category = new Category();
+			$data['categories'] = $category->findAll('asc');
+		}
 
 		$this->view('admin/courses',$data);
 	}
@@ -50,8 +57,8 @@ class Admin extends Controller
 		$data['row'] = $row = $user->first(['id'=>$id]);
 
 		if($_SERVER['REQUEST_METHOD'] == "POST" && $row)
-		{	
-
+		{
+		
 			$folder = "uploads/images/";
 			if(!file_exists($folder))
 			{
@@ -80,31 +87,32 @@ class Admin extends Controller
 							if(file_exists($row->image))
 							{
 								unlink($row->image);
-							} else {
-								$user->errors['image'] = "This file type is not allowed";
-							} 
-						}else {
-							$user->errors['image'] = "Could not upload image";
-						}
-					}
+							}
 
+						}else{
+							$user->errors['image'] = "This file type is not allowed";
+						}
+					}else{
+						$user->errors['image'] = "Could not upload image";
+					}
 				}
 
 				$user->update($id,$_POST);
 
-			}
+				//message("Profile saved successfully");
+				//redirect('admin/profile/'.$id);
+ 			}
 
-			if(empty($user->errors)) {
+			if(empty($user->errors)){
 				$arr['message'] = "Profile saved successfully";
-			} else {
+			}else{
 				$arr['message'] = "Please correct these errors";
 				$arr['errors'] = $user->errors;
 			}
 
 			echo json_encode($arr);
 
-		die;		
-
+ 			die;
 		}
 
 		$data['title'] = "Profile";

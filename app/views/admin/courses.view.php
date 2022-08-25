@@ -94,21 +94,26 @@
                         <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="course-message-tab" data-bs-toggle="tab" data-bs-target="#course-messages" type="button" role="tab" aria-controls="course-messages" aria-selected="false">Course messages</button>
                     </li>
                 </ul>
-                <div class="tab-content pt-2" id="borderedTabJustifiedContent">
+                <div oninput="something_changed(event)"class="tab-content pt-2" id="borderedTabJustifiedContent">
                     <div class="tab-pane fade show active" id="intended-learners" role="tabpanel" aria-labelledby="intended-learners">
                         1Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.
+                        <input type="text" name="" />
                     </div>
                     <div class="tab-pane fade" id="curriculum" role="tabpanel" aria-labelledby="curriculum">
                         2Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Voluptate nihil recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
+                        <input type="text" name="" />
                     </div>
                     <div class="tab-pane fade" id="course-landing-page" role="tabpanel" aria-labelledby="landing-page">
                         3Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+                        <input type="text" name="" />
                     </div>
                     <div class="tab-pane fade" id="promotions" role="tabpanel" aria-labelledby="promotions">
                        4 Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+                        <input type="text" name="" />
                     </div>
                     <div class="tab-pane fade" id="course-messages" role="tabpanel" aria-labelledby="course-messages">
                        5 Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+                        <input type="text" name="" />
                     </div>
                </div><!-- End Bordered Tabs Justified -->
             <?php else: ?>
@@ -182,7 +187,8 @@
 
 <script>
 
-     var tab = sessionStorage.getItem("tab") ? sessionStorage.getItem("tab"): "#intended-learners";
+    var tab = sessionStorage.getItem("tab") ? sessionStorage.getItem("tab"): "#intended-learners";
+    var dirty = false;
 
     function show_tab(tab_name)
       {
@@ -196,8 +202,24 @@
     function set_tab(tab_name) {
         tab = tab_name;
         sessionStorage.setItem("tab", tab_name);
-        alert(tab_name)
-     }
+
+        if (dirty) {
+            //ask user to save when switching tabs
+            if (!confirm("Your changes were not saved. Continue?")) {
+                 tab = dirty;
+                sessionStorage.setItem("tab", dirty);
+                setTimeout(function () {
+                    show_tab(dirty);
+                }, 10);
+            } else {
+                dirty = false;
+            }
+        }
+    }
+
+    function something_changed(e) {
+        dirty = tab;
+    }
 
 </script>
 

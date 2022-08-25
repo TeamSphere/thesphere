@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 /**
  * admin class
  */
 class Admin extends Controller
 {
-	
+
 	public function index()
 	{
 
@@ -35,8 +35,34 @@ class Admin extends Controller
 
 		if($action == 'add')
 		{
-			$category = new Category();
+			$category = new Category_model();
+			$course = new Course_model();
+
 			$data['categories'] = $category->findAll('asc');
+
+			if($_SERVER['REQUEST_METHOD'] == "POST")
+			{
+				if($course->validate($_POST))
+				{
+					$user_id = Auth::getId();
+					$_POST['date'] = date("Y-m-d H:i:s");
+					$_POST['user_id'] = $user_id;
+
+					$course->insert($_POST);
+
+					$row = $course->first(['user_id'=>$user_id,'published'=>0]);
+					message("Your Course was successfuly created");
+
+					if($row){
+						redirect('admin/courses/edit/'.$row->id);
+					}else{
+						redirect('admin/courses');
+					}
+				}
+
+				$data['errors'] = $course->errors;
+			}
+
 		}
 
 		$this->view('admin/courses',$data);
@@ -58,7 +84,7 @@ class Admin extends Controller
 
 		if($_SERVER['REQUEST_METHOD'] == "POST" && $row)
 		{
-		
+
 			$folder = "uploads/images/";
 			if(!file_exists($folder))
 			{
@@ -66,7 +92,7 @@ class Admin extends Controller
 				file_put_contents($folder."index.php", "<?php //silence");
 				file_put_contents("uploads/index.php", "<?php //silence");
 			}
- 
+
  			if($user->edit_validate($_POST,$id))
  			{
 

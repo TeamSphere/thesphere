@@ -68,7 +68,6 @@ class Admin extends Controller
             //courses view
             $data['rows'] = $course->where(['user_id'=>$user_id]);
 
-            show($data['rows']);die;
         }
 
 		$this->view('admin/courses',$data);

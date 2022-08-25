@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 /**
  * main model class
  */
 class Model extends Database
 {
-	
+
 	protected $table = "";
 
 	public function insert($data)
@@ -49,13 +49,13 @@ class Model extends Database
 		$query = "update ".$this->table." set ";
 
 		foreach ($keys as $key) {
-			$query .= $key ."=:" . $key . ","; 
+			$query .= $key ."=:" . $key . ",";
 
 		}
 
 		$query = trim($query,",");
 		$query .= " where id = :id ";
-		
+
 		$data['id'] = $id;
 		$this->query($query,$data);
 
@@ -65,11 +65,16 @@ class Model extends Database
 	{
 
 		$query = "select * from ".$this->table." order by id $order ";
- 
+
 		$res = $this->query($query);
 
 		if(is_array($res))
 		{
+            if(property_exists($this, 'afterSelect')) {
+                foreach($this->afterSelect as $func) {
+                    $res = $this->$func($res);
+                }
+            }
 			return $res;
 		}
 
@@ -87,13 +92,20 @@ class Model extends Database
 		foreach ($keys as $key) {
 			$query .= $key . "=:" . $key . " && ";
 		}
- 
+
  		$query = trim($query,"&& ");
         $query .= " order by id $order ";
 		$res = $this->query($query,$data);
 
 		if(is_array($res))
 		{
+
+            //run afterSelect functions
+            if(property_exists($this, 'afterSelect')) {
+                foreach($this->afterSelect as $func) {
+                    $res = $this->$func($res);
+                }
+            }
 			return $res;
 		}
 
@@ -111,14 +123,21 @@ class Model extends Database
 		foreach ($keys as $key) {
 			$query .= $key . "=:" . $key . " && ";
 		}
- 
+
  		$query = trim($query,"&& ");
  		$query .= " order by id $order limit 1";
 
 		$res = $this->query($query,$data);
 
 		if(is_array($res))
-		{
+        {
+            //run afterSelect functions
+            if(property_exists($this, 'afterSelect')) {
+                foreach($this->afterSelect as $func) {
+                    $res = $this->$func($res);
+                }
+            }
+
 			return $res[0];
 		}
 
@@ -126,6 +145,6 @@ class Model extends Database
 
 	}
 
-	
+
 
 }

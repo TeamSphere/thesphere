@@ -9,6 +9,17 @@ class Course_model extends Model
 	public $errors = [];
 	protected $table = "courses";
 
+    protected $afterSelect = [
+
+        'get_category',
+        'get_sub_category',
+        'get_user',
+        'get_price',
+        'get_level',
+        'get_language',
+
+    ];
+    protected $beforeUpdate = [];
 	protected $allowedColumns = [
 
 		'title',
@@ -146,5 +157,25 @@ class Course_model extends Model
 		return false;
 	}
 
+    protected function get_category($rows) {
+
+
+        return $rows;
+    }
+    protected function get_sub_category($rows) {
+        return $rows;
+    }
+    protected function get_user($rows) {
+        return $rows;
+    }
+    protected function get_price($rows) {
+        return $rows;
+    }
+    protected function get_level($rows) {
+        return $rows;
+    }
+    protected function get_language($rows) {
+        return $rows;
+    }
 
 }

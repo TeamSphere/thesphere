@@ -8,6 +8,9 @@ function show($stuff)
 	echo "</pre>";
 }
 
+function get_date($date) {
+    return date("jS M, Y",strtotime($date));
+}
 
 function set_value($key, $default = '')
 {
@@ -21,6 +24,27 @@ function set_value($key, $default = '')
 	{
 		return $default;
 	}
+
+	return '';
+}
+
+function set_select($key, $value, $default = '')
+{
+
+
+	if(!empty($_POST[$key]))
+	{
+		if($value == $_POST[$key]) {
+            return ' selected ';
+        }
+	}else
+        if(!empty($default))
+        {
+            if ($value == 'default') {
+                return ' selected ';
+            }
+
+        }
 
 	return '';
 }
@@ -66,7 +90,7 @@ function str_to_url($url)
    $url = iconv("utf-8", "us-ascii//TRANSLIT", $url);
    $url = strtolower($url);
    $url = preg_replace('~[^-a-z0-9_]+~', '', $url);
-   
+
    return $url;
 }
 
@@ -86,12 +110,12 @@ function resize_image($filename,$max_size = 700)
 			case 'gif':
 				$image = imagecreatefromgif($filename);
 				break;
-			
+
 			case 'jpg':
 			case 'jpeg':
 				$image = imagecreatefromjpeg($filename);
 				break;
-			
+
 			default:
 				$image = imagecreatefromjpeg($filename);
 				break;
@@ -124,12 +148,12 @@ function resize_image($filename,$max_size = 700)
 			case 'gif':
 				imagegif($dst_image,$filename);
 				break;
-			
+
 			case 'jpg':
 			case 'jpeg':
 				imagejpeg($dst_image,$filename,90);
 				break;
-			
+
 			default:
 				imagejpeg($dst_image,$filename,90);
 				break;

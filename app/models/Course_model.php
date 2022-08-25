@@ -9,17 +9,18 @@ class Course_model extends Model
 	public $errors = [];
 	protected $table = "courses";
 
-    protected $afterSelect = [
+	protected $afterSelect = [
 
-        'get_category',
-        'get_sub_category',
-        'get_user',
-        'get_price',
-        'get_level',
-        'get_language',
+		'get_category',
+		'get_sub_category',
+		'get_user',
+		'get_price',
+		'get_level',
+		'get_language',
+	];
 
-    ];
-    protected $beforeUpdate = [];
+	protected $beforeUpdate = [];
+
 	protected $allowedColumns = [
 
 		'title',
@@ -54,6 +55,15 @@ class Course_model extends Model
 		if(!preg_match("/^[a-zA-Z \-\_\&]+$/", trim($data['title'])))
 		{
 			$this->errors['title'] = "Course title can only have letters, spaces and [-_&]";
+		}
+
+		if(empty($data['primary_subject']))
+		{
+			$this->errors['primary_subject'] = "A primary subject is required";
+		}else
+		if(!preg_match("/^[a-zA-Z \-\_\&]+$/", trim($data['primary_subject'])))
+		{
+			$this->errors['primary_subject'] = "Primary subject can only have letters, spaces and [-_&]";
 		}
 
 
@@ -157,56 +167,81 @@ class Course_model extends Model
 		return false;
 	}
 
-    protected function get_category($rows) {
+	protected function get_category($rows)
+	{
+		$db = new Database();
+		if(!empty($rows[0]->category_id))
+		{
+			foreach ($rows as $key => $row) {
 
-        $db = new Database();
+				$query = "select * from categories where id = :id limit 1";
+				$cat = $db->query($query,['id'=>$row->category_id]);
+				if(!empty($cat)){
 
-        if(!empty($rows[0]->category_id)) {
+					$rows[$key]->category_row = $cat[0];
+				}
+			}
+		}
 
-            foreach($rows as $key => $row) {
+		return $rows;
+	}
 
-                $query = "select * from categories where id = :id limit 1";
-                $cat = $db->query($query,['id'=>$row->category_id]);
+	protected function get_sub_category($rows){
 
-                if(!empty($cat)) {
-                    $rows[$key]->category_row = $cat[0];
-                }
-            }
-        }
+		return $rows;
+	}
 
-        return $rows;
-    }
-    protected function get_sub_category($rows) {
-        return $rows;
-    }
-    protected function get_user($rows) {
+	protected function get_user($rows){
 
-        $db = new Database();
+		$db = new Database();
+		if(!empty($rows[0]->user_id))
+		{
+			foreach ($rows as $key => $row) {
 
-        if(!empty($rows[0]->user_id)) {
+				$query = "select firstname, lastname, role from users where id = :id limit 1";
+				$user = $db->query($query,['id'=>$row->user_id]);
+				if(!empty($user)){
 
-            foreach($rows as $key => $row) {
+					$user[0]->name = $user[0]->firstname . ' '. $user[0]->lastname;
+					$rows[$key]->user_row = $user[0];
+				}
+			}
+		}
 
-                $query = "select firstname, lastname, role from users where id = :id limit 1";
-                $user = $db->query($query,['id'=>$row->user_id]);
+		return $rows;
+	}
 
-                if(!empty($user)) {
-                    $user[0]->name = $user[0]->firstname . ' '. $user[0]->lastname;
-                    $rows[$key]->user_row = $user[0];
-                }
-            }
-        }
+	protected function get_price($rows){
 
-        return $rows;
-    }
-    protected function get_price($rows) {
-        return $rows;
-    }
-    protected function get_level($rows) {
-        return $rows;
-    }
-    protected function get_language($rows) {
-        return $rows;
-    }
+		$db = new Database();
+		if(!empty($rows[0]->price_id))
+		{
+			foreach ($rows as $key => $row) {
+
+				$query = "select * from prices where id = :id limit 1";
+				$price = $db->query($query,['id'=>$row->price_id]);
+				if(!empty($price)){
+
+					$price[0]->name = $price[0]->name . ' ($'. $price[0]->price .')';
+					$rows[$key]->price_row = $price[0];
+				}
+			}
+		}
+
+		return $rows;
+	}
+
+	protected function get_level($rows){
+
+
+		return $rows;
+	}
+
+	protected function get_language($rows){
+
+		return $rows;
+	}
+
+
 
 }

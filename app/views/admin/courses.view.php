@@ -29,6 +29,14 @@
     .hide { 
         display: none;
     }
+
+    .loader {
+        position: relative;
+        width: 200px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%);
+    }
 </style>
 
 <?php if($action == 'add'):?>
@@ -120,7 +128,7 @@
 
                 <div oninput="something_changed(event)">
                     <div id="tabs-content">
-                        1
+                        <img class="loader" src="<?=ROOT?>/assets/images/loader.gif" />
                     </div
                 </div>
 
@@ -201,7 +209,10 @@
     var dirty = false;
 
     function show_tab(tab_name)
-      {
+    {
+        var contentDiv = document.querySelector("#tabs-content");
+        show_loader(contentDiv);
+
         //change active tab
         var div = document.querySelector("#" + tab_name);
         var children = div.parentNode.children
@@ -211,13 +222,51 @@
         }
         div.classList.add('active-tab');
 
-        var content = tab_name + "<input />";
-        document.querySelector("#tabs-content").innerHTML = content;
-        
+        var data = {};
+        data.tab_name = tab;
+        data.data_type = "read";
+        send_data(data);
         disable_save_button(false);
         
 
+    }
+
+    function send_data(obj)
+  {
+
+    var myform = new FormData();
+    for(key in obj){
+      myform.append(key,obj[key]); 
+    }
+
+    var ajax = new XMLHttpRequest();
+
+    ajax.addEventListener('readystatechange',function(){
+
+      if(ajax.readyState == 4){
+
+        if(ajax.status == 200){
+          //everything went well
+          //alert("upload complete");
+          //window.location.reload();
+          handle_result(ajax.responseText);
+        }else{
+          //error
+          alert("an error occurred");
+        }
       }
+    });
+
+    ajax.open('post','',true);
+    ajax.send(myform);
+
+  }
+
+    function handle_result(result) {
+
+        var contentDiv = document.querySelector("#tabs-content");
+        contentDiv.innerHTML = result;
+    };
 
     function set_tab(tab_name) {
 
@@ -249,6 +298,11 @@
             document.querySelector(".js-save-button").classList.add("disabled");
         }
     }
+
+    function show_loader(item) {
+        item.innerHTML = `<img class="loader" src="<?=ROOT?>/assets/images/loader.gif" />`
+    }
+
 
 </script>
 

@@ -69,9 +69,23 @@ class Admin extends Controller
         }
 
         else if($action == 'edit') {
-            
+
             //get course information
 			$data['row'] = $course->first(['user_id'=>$user_id,'id'=>$id]);
+
+        if($_SERVER['REQUEST_METHOD'] == "POST") {
+
+            if(!empty($_POST['data_type']) && $_POST['data_type'] == "read") {
+
+                if($_POST['tab_name'] == "course-landing-page") {
+
+                    //echo "hello there";
+                }
+
+                echo $_POST['tab_name'];
+            }
+            die;
+        }
 
 		}else{
 
